@@ -65,8 +65,22 @@ class Save extends Action
 
             try {
 
-                if($objectInstance->getData('identifier') == null)
+                if($objectInstance->getData('entity_id') == null)
                     $objectInstance->setIdentifier($this->generateRandomString());
+/*
+                    fieldset->addField(
+        'event_date',
+        'date',
+        [
+            'name' => 'event_date',
+            'label' => __('Date'),
+            'title' => __('Date'),
+            'required' => true,
+            'date_format' => 'yyyy-MM-dd',
+            'time_format' => 'hh:mm:ss'
+        ]
+); */
+
 
                 $objectInstance->save();
                 $this->messageManager->addSuccessMessage(__('You saved this record.'));

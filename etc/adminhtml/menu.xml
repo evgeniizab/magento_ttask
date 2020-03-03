@@ -3,7 +3,9 @@
     <menu>
         <add id="Ez_Ttask::ttask" title="Tasks" module="Ez_Ttask" sortOrder="51" resource="Ez_Ttask::ttask"/>
         <add id="Ez_Ttask::projects" title="Projects" module="Ez_Ttask" sortOrder="10" action="ez_ttask/project" resource="Ez_Ttask::project" parent="Ez_Ttask::ttask"/>
-        <add id="Ez_Ttask::post" title="Tasks" module="Ez_Ttask" sortOrder="10" action="ez_ttask/post" resource="Ez_Ttask::post" parent="Ez_Ttask::ttask"/>
+        <add id="Ez_Ttask::post" title="Tasks" module="Ez_Ttask" sortOrder="10" action="ez_ttask/tasks" resource="Ez_Ttask::tasks" parent="Ez_Ttask::ttask"/>
         <add id="Ez_Ttask::ttask_configuration" title="Configuration" module="Ez_Ttask" sortOrder="99" parent="Ez_Ttask::ttask" action="adminhtml/system_config/edit/section/ttask" resource="Ez_Ttask::ttask_configuration"/>
+	<add id="Ez_Ttask::tasks" title="TasksX" module="Ez_Ttask" sortOrder="10" parent="Ez_Ttask::ttask" action="Ez_Ttask/tasks" resource="Ez_Ttask::tasks"/>
+
     </menu>
 </config>

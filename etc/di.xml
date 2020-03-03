@@ -1,18 +1,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
 
-    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
-        <arguments>
-            <argument name="collections" xsi:type="array">
-                <item name="ez_ttask_tasks_listing_data_source" xsi:type="string">Ez\Ttask\Model\ResourceModel\Tasks\Grid\Collection</item>
-            </argument>
-        </arguments>
-    </type>
-    <virtualType name="Ez\Ttask\Model\ResourceModel\Tasks\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
-        <arguments>
-            <argument name="mainTable" xsi:type="string">ez_ttask_tasks</argument>
-            <argument name="resourceModel" xsi:type="string">Ez\Ttask\Model\ResourceModel\Tasks</argument>
-        </arguments>
-    </virtualType>
+  
 
     <type name="Ez\Ttask\Controller\Index\Example">
         <plugin name="Ez_Ttask_Plugin" type="EZ\Ttask\Plugin\ExamplePlugin" sortOrder="10" disabled="false"  />
@@ -26,4 +14,34 @@
         </arguments>
     </type>
 
+
+    <virtualType name="EzTasksGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+      <arguments>
+          <argument name="collection" xsi:type="object" shared="false">Ez\Ttask\Model\ResourceModel\Tasks\Collection</argument>
+          <argument name="filterPool" xsi:type="object" shared="false">EzTasksGridFilterPool</argument>
+      </arguments>
+  </virtualType>
+  <virtualType name="EzTasksGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+      <arguments>
+          <argument name="appliers" xsi:type="array">
+              <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+              <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+          </argument>
+      </arguments>
+  </virtualType>
+  <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+      <arguments>
+          <argument name="collections" xsi:type="array">
+              <item name="ez_ttask_tasks_listing_data_source" xsi:type="string">Ez\Ttask\Model\ResourceModel\Tasks\Grid\Collection</item>
+          </argument>
+      </arguments>
+  </type>
+  <type name="Ez\Ttask\Model\ResourceModel\Tasks\Grid\Collection">
+      <arguments>
+          <argument name="mainTable" xsi:type="string">ez_ttask_tasks</argument>
+          <argument name="eventPrefix" xsi:type="string">ez_ttask_tasks_grid_collection</argument>
+          <argument name="eventObject" xsi:type="string">ez_ttask_tasks_grid_collection</argument>
+          <argument name="resourceModel" xsi:type="string">Ez\Ttask\Model\ResourceModel\Tasks</argument>
+      </arguments>
+  </type>
 </config>
