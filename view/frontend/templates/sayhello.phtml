@@ -1,0 +1,110 @@
+<?php
+
+/**
+ * @var \Ez\Ttask\Block\Display $block
+
+ */
+
+//echo $task->sayHello();
+
+?>
+
+<style>
+table {  font-family: arial, sans-serif;  border-collapse: collapse;  width: 100%;  margin-top: 30px;}
+td, th {  border: 1px solid #dddddd;  text-align: left;  padding: 8px;  }
+tr:nth-child(even) { background-color: #dddddd; }
+.post-id{width:2%} .post-name{width:30%}
+
+</style>
+
+<?php
+
+
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerFactory = $objectManager->get('\Magento\Customer\Model\CustomerFactory')->create();
+
+
+
+foreach ($block->getProjectCollection() as $key=>$proj){
+    $project_owner = $customerFactory->load($proj->getId());
+    $project_owner_info  = $project_owner->getFirstname().' '.$project_owner->getLastname().' ('.$project_owner->getEmail().')';
+echo '  <h3>'.$proj->getName().'</h3>
+        <p> Руководитель проекта: '.$project_owner_info.'</p>
+        <p>'.$proj->getCreateAt().' / '.$proj->getUpdateAt().'</p>
+        <p>'.$proj->getDescription().'</p>';
+        echo '<table>
+          <tr>
+            <th>№ п./п.</th>
+            <th>Status</th>
+            <th>Проект</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Назначил</th>
+            <th>Исполнитель</th>
+            <th>Create At/Update At</th>
+            <th>Deadline</th>
+          </tr>';
+
+        foreach ($block->getTaskCollection() as $key=>$task){
+          $count_tasks = 1;
+
+                    if ($task->getP_id() == $proj->getId()){
+                      $customer = $customerFactory->load($task->getu_id());
+                      $customer_info = $customer->getFirstname().' '.$customer->getLastname().' ('.$customer->getEmail().')';
+                      $otv_user = $customerFactory->load($task->getOtv_user());
+                      $otv_user_info = $otv_user->getFirstname().' '.$otv_user->getLastname().' ('.$otv_user->getEmail().')';
+                      $task_status = $task->getStatus();
+                      switch ($task_status) {
+                        case '0':
+                          $task_status_info = 'Начать';
+                          break;
+                        case '1':
+                        //    $task_status_info = '<img src="'. $block->escapeUrl($this->getViewFileUrl('Ez_Ttask::img/pbar.gif')).'" title="Выполняется" /> <a href="#">||</a> <a href="#">Stop</a>';
+                            break;
+                        case '2':
+                          $task_status_info = 'Пауза';
+                          break;
+                        case '3':
+                          $task_status_info = 'Выполнена';
+                          break;
+
+                      }
+                      echo '<tr>
+                            <td>'.$count_tasks.'</td>
+                            <td>'.$task_status_info.'</td>
+                            <td>'.$task->getp_id().'</td>
+                            <td>'.$task->getName().'</td>
+                            <td>'.$task->getDescription().'</td>
+                            <td>'.$customer_info.'</td>
+                            <td>'.$otv_user_info.'</td>
+                            <td>'.$task->getCreateAt().'<br>
+                                '.$task->getUpdateAt().'</td>
+                            <td>'.$task->getDeadline().'</td>
+
+                            </tr>';
+                            ++$count_tasks;
+                      }
+
+            }
+echo '</table><br><br><br><hr>';
+}
+
+
+
+
+
+
+
+echo '<br><br>-------------------------<br><br>';
+
+
+
+?>
+
+
+
+
+
+</body>
+</html>

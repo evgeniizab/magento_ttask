@@ -1,0 +1,26 @@
+{
+    "name": "Ez/module-ttask",
+    "description": "",
+
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "NO",
+    "authors": [
+        {
+          "name": "Hi",
+          "email": "evgenii@zabairachnyi.com",
+          "homepage": "https://zabairachnyi.com",
+          "role": "Leader"
+        }
+    ],
+
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ez\\Ttask\\": ""
+        }
+    }
+
+}
