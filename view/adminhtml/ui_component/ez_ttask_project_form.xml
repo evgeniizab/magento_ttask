@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * ez_ttask_tasks_form
+ * ez_ttask_project_form
  * @copyright Copyright © 2020 Ez. All rights reserved.
  * @author    evgenii@zabairachnyi.com
  */
@@ -18,16 +18,16 @@
         <item name="template" xsi:type="string">templates/form/collapsible</item>
         <item name="label" xsi:type="string" translate="true">Project Form</item>
         <item name="buttons" xsi:type="array">
-            <item name="back" xsi:type="string">Ez\Ttask\Block\Adminhtml\Tasks\Edit\BackButton</item>
-            <item name="delete" xsi:type="string">Ez\Ttask\Block\Adminhtml\Tasks\Edit\DeleteButton</item>
-            <item name="save" xsi:type="string">Ez\Ttask\Block\Adminhtml\Tasks\Edit\SaveButton</item>
-            <item name="save_and_continue" xsi:type="string">Ez\Ttask\Block\Adminhtml\Tasks\Edit\SaveAndContinueButton</item>
+            <item name="back" xsi:type="string">Ez\Ttask\Block\Adminhtml\Project\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Ez\Ttask\Block\Adminhtml\Project\Edit\DeleteButton</item>
+            <item name="save" xsi:type="string">Ez\Ttask\Block\Adminhtml\Project\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Ez\Ttask\Block\Adminhtml\Project\Edit\SaveAndContinueButton</item>
         </item>
     </argument>
-    <dataSource name="ez_ttask_tasks_form_data_source">
+    <dataSource name="ez_ttask_project_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Ez\Ttask\Ui\Component\Form\Tasks\DataProvider</argument>
-            <argument name="name" xsi:type="string">ez_ttask_tasks_form_data_source</argument>
+            <argument name="class" xsi:type="string">Ez\Ttask\Ui\Component\Form\Project\DataProvider</argument>
+            <argument name="name" xsi:type="string">ez_ttask_project_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
             <argument name="requestFieldName" xsi:type="string">entity_id</argument>
             <argument name="data" xsi:type="array">
@@ -49,7 +49,7 @@
                 <item name="label" xsi:type="string" translate="true">Main Information</item>
             </item>
         </argument>
-        <field name="id">
+        <field name="entity_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">false</item>
@@ -59,22 +59,12 @@
                 </item>
             </argument>
         </field>
-        <field name="name">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="visible" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">main_fieldset</item>
-                </item>
-            </argument>
-        </field>
-      <!--  <field name="identifier">
+      <!--  <field name="ui">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string">Identifier</item>
+                    <item name="label" xsi:type="string">User ID</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">main_fieldset</item>
                     <item name="validation" xsi:type="array">
@@ -84,6 +74,114 @@
                 </item>
             </argument>
         </field> -->
+
+        <field name="otv_user">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string">Otv User</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">main_fieldset</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </field>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">main_fieldset</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </field>
+        <field name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string">Description</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">main_fieldset</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="create_at">
+    <argument name="data" xsi:type="array">
+        <item name="config" xsi:type="array">
+            <item name="dataType" xsi:type="string">string</item>
+            <item name="label" xsi:type="string" translate="true">create_at</item>
+            <item name="formElement" xsi:type="string">date</item>
+            <item name="source" xsi:type="string">create_at</item>
+            <item name="sortOrder" xsi:type="number">21</item>
+            <item name="dataScope" xsi:type="string">create_at</item>
+            <item name="validation" xsi:type="array">
+                <item name="required-entry" xsi:type="boolean">true</item>
+            </item>
+            <item name="options" xsi:type="array">
+                <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                <item name="showsTime" xsi:type="boolean">true</item>
+            </item>
+        </item>
+    </argument>
+  </field>
+        <field name="update_at">
+    <argument name="data" xsi:type="array">
+        <item name="config" xsi:type="array">
+            <item name="dataType" xsi:type="string">string</item>
+            <item name="label" xsi:type="string" translate="true">Update</item>
+            <item name="formElement" xsi:type="string">date</item>
+            <item name="source" xsi:type="string">update_at</item>
+            <item name="sortOrder" xsi:type="number">21</item>
+            <item name="dataScope" xsi:type="string">update_at</item>
+            <item name="validation" xsi:type="array">
+                <item name="required-entry" xsi:type="boolean">true</item>
+            </item>
+            <item name="options" xsi:type="array">
+                <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                <item name="showsTime" xsi:type="boolean">true</item>
+            </item>
+        </item>
+    </argument>
+</field>
+        <field name="deadline">
+    <argument name="data" xsi:type="array">
+        <item name="config" xsi:type="array">
+            <item name="dataType" xsi:type="string">string</item>
+            <item name="label" xsi:type="string" translate="true">Deadline</item>
+            <item name="formElement" xsi:type="string">date</item>
+            <item name="source" xsi:type="string">deadline</item>
+            <item name="sortOrder" xsi:type="number">21</item>
+            <item name="dataScope" xsi:type="string">deadline</item>
+            <item name="validation" xsi:type="array">
+                <item name="required-entry" xsi:type="boolean">true</item>
+            </item>
+            <item name="options" xsi:type="array">
+                <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                <item name="showsTime" xsi:type="boolean">true</item>
+            </item>
+        </item>
+    </argument>
+</field>
+
         <!-- Add your fields here -->
     </fieldset>
 </form>

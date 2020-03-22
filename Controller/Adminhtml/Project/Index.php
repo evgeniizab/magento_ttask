@@ -1,27 +1,57 @@
 <?php
-
+/**
+ * index.php
+ *
+ * @copyright Copyright © 2020 Ez. All rights reserved.
+ * @author    evgenii@zabairachnyi.com
+ */
 namespace Ez\Ttask\Controller\Adminhtml\Project;
 
-class Index extends \Magento\Backend\App\Action
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\View\Result\PageFactory;
+
+class Index extends Action
 {
-	protected $resultPageFactory = false;
+    /**
+     * @var PageFactory
+     */
+    protected $resultPageFactory;
 
-	public function __construct(
-		\Magento\Backend\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $resultPageFactory
-	)
-	{
-		parent::__construct($context);
-		$this->resultPageFactory = $resultPageFactory;
-	}
+    /**
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     */
+    public function __construct(
+        Context $context,
+        PageFactory $resultPageFactory
+    ) {
+        parent::__construct($context);
+        $this->resultPageFactory = $resultPageFactory;
+    }
 
-	public function execute()
-	{
-		$resultPage = $this->resultPageFactory->create();
-		$resultPage->getConfig()->getTitle()->prepend((__('Project')));
+    /**
+     * Check the permission to run it
+     *
+     * @return boolean
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Ez_Ttask::project');
+    }
 
-		return $resultPage;
-	}
+    /**
+     * Index action
+     *
+     * @return \Magento\Backend\Model\View\Result\Page
+     */
+    public function execute()
+    {
+        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu('Ez_Ttask::project');
+        $resultPage->getConfig()->getTitle()->prepend(__('Project'));
 
-
+        return $resultPage;
+    }
 }

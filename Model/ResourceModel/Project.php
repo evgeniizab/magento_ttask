@@ -1,24 +1,24 @@
 <?php
+
+/**
+ * Tasks.php
+ *
+ * @copyright Copyright © 2020 Ez. All rights reserved.
+ * @author    evgenii@zabairachnyi.com
+ */
 namespace Ez\Ttask\Model\ResourceModel;
 
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
-class Project extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Project extends AbstractDb
 {
-
-	public function __construct(
-		\Magento\Framework\Model\ResourceModel\Db\Context $context
-	)
-	{
-		parent::__construct($context);
-	}
-
-	protected function _construct()
-	{
-		$this->_init('ez_ttask_project', 'id');
-	}
-
-
-
-
-
+    /**
+     * Initialize resource model
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        $this->_init('ez_ttask_project', 'entity_id');
+    }
 }

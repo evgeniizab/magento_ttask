@@ -1,27 +1,69 @@
 <?php
+
+/**
+ * Tasks.php
+ *
+ * @copyright Copyright © 2020 Ez. All rights reserved.
+ * @author    evgenii@zabairachnyi.com
+ */
+
 namespace Ez\Ttask\Model;
-class project extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
+
+use Magento\Framework\DataObject\IdentityInterface;
+use Magento\Framework\Model\AbstractModel;
+
+class Project extends AbstractModel implements IdentityInterface
 {
-	const CACHE_TAG = 'ez_ttask_project';
+    /**
+     * CMS page cache tag
+     */
+    const CACHE_TAG = 'ez_ttask_project';
 
-	protected $_cacheTag = 'ez_ttask_project';
+    /**
+     * @var string
+     */
+    protected $_cacheTag = 'ez_ttask_project';
 
-	protected $_eventPrefix = 'ez_ttask_project';
+    /**
+     * Prefix of model events names
+     *
+     * @var string
+     */
+    protected $_eventPrefix = 'ez_ttask_project';
 
-	protected function _construct()
-	{
-		$this->_init('Ez\Ttask\Model\ResourceModel\Project');
-	}
+    /**
+     * Initialize resource model
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        parent::_construct();
+        $this->_init('Ez\Ttask\Model\ResourceModel\Project');
+    }
 
-	public function getIdentities()
-	{
-		return [self::CACHE_TAG . '_' . $this->getId()];
-	}
+    /**
+     * Get identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
+    }
 
-	public function getDefaultValues()
-	{
-		$values = [];
-
-		return $values;
-	}
+    /**
+     * Save from collection data
+     *
+     * @param array $data
+     * @return $this|bool
+     */
+    public function saveCollection(array $data)
+    {
+        if (isset($data[$this->getId()])) {
+            $this->addData($data[$this->getId()]);
+            $this->getResource()->save($this);
+        }
+        return $this;
+    }
 }
